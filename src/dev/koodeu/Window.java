@@ -20,6 +20,7 @@ public class Window extends JFrame implements ActionListener, FoodCost{
     JButton bTotalCost;
     double foodCost, monthlyFoodCost, bagSize, sandBagSize, sandBagCost, sandCost, totalCost;
     int dailyFoodDose, sandExchangeRate;
+    ImageIcon catIcon;
 
     Window(){
         setTitle("Miaukulator v.1.0");
@@ -148,18 +149,37 @@ public class Window extends JFrame implements ActionListener, FoodCost{
         }
 
         else if (source == mAbout) {
-
-        JOptionPane.showMessageDialog(null, "To jest pierwsza wersja Miaukulatora, który liczy miesięczny koszt utrzymania kociambra :-)", "O Miaukulatorze", JOptionPane.INFORMATION_MESSAGE);
+        catIcon = new ImageIcon("src/dev/koodeu/images/cat.png");
+        JOptionPane.showMessageDialog(null, "\nTo jest pierwsza wersja Miaukulatora, który liczy miesięczny koszt utrzymania kociambra :-)" +
+                        " \n\n                                     KociRights Krystian Limiera\n",
+                "O Miaukulatorze", JOptionPane.INFORMATION_MESSAGE, catIcon);
         }
 
         else if (source == bTotalCost) {
+
+
+
+            if (tFoodBagCost.getText().contains(",") ){
+                tFoodBagCost.setText(tFoodBagCost.getText().replace(",","."));
+            }
             foodCost = Double.parseDouble(tFoodBagCost.getText());
+
+            if (tFoodBagSize.getText().contains(",")){
+                tFoodBagSize.setText(tFoodBagSize.getText().replace(",","."));
+            }
             bagSize = Double.parseDouble(tFoodBagSize.getText());
             dailyFoodDose = Integer.parseInt(tDailyFoodDose.getText());
             monthlyFoodCost = Math.round((foodCost / bagSize / 1000 * dailyFoodDose * 30.5) * 100) / 100.0;
             lMonthlyFoodCost.setText("Miesięczny koszt karmy: " + (String.valueOf(monthlyFoodCost)) + "zł");
 
+            if(tSandBagSize.getText().contains(",")){
+                tSandBagSize.setText(tSandBagSize.getText().replace(",","."));
+            }
             sandBagSize = Double.parseDouble(tSandBagSize.getText());
+
+            if (tSandBagCost.getText().contains(",")){
+                tSandBagCost.setText(tSandBagCost.getText().replace(",",".") );
+            }
             sandBagCost = Double.parseDouble(tSandBagCost.getText());
             sandExchangeRate = Integer.parseInt(comboSandExchangeRate.getSelectedItem().toString());
             sandCost = Math.round((sandBagCost / sandBagSize * (sandExchangeRate * 1.5)) * 100) / 100.00;
