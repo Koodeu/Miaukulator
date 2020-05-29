@@ -23,7 +23,7 @@ public class Window extends JFrame implements ActionListener, FoodCost{
     ImageIcon catIcon;
 
     Window(){
-        setTitle("Miaukulator v.1.0");
+        setTitle("Miaukulator v.1.01");
         setSize(500, 400);
         getRootPane().setDefaultButton(bTotalCost);
         setLayout(null);
@@ -187,6 +187,8 @@ public class Window extends JFrame implements ActionListener, FoodCost{
 
             totalCost = Math.round((monthlyFoodCost + sandCost) *100)/100.00;
             lTotalCost.setText(String.valueOf("Całkowity miesięczny koszt: " + totalCost + "zł"));
+
+            JOptionPane.showMessageDialog(null, "Miesięczny koszt utrzymania Twojego kota to: " + totalCost + " zł", "Info o kosztach", JOptionPane.INFORMATION_MESSAGE);
 
         }
 
