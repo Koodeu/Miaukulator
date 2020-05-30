@@ -5,8 +5,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
+import java.util.Scanner;
+
+
 
 public class Window extends JFrame implements ActionListener, FoodCost{
 
@@ -20,10 +26,10 @@ public class Window extends JFrame implements ActionListener, FoodCost{
     JButton bTotalCost;
     double foodCost, monthlyFoodCost, bagSize, sandBagSize, sandBagCost, sandCost, totalCost;
     int dailyFoodDose, sandExchangeRate;
-    ImageIcon catIcon;
+    ImageIcon catIcon, catIcon2;
 
     Window(){
-        setTitle("Miaukulator v.1.01");
+        setTitle("Miaukulator v.1.02");
         setSize(500, 400);
         getRootPane().setDefaultButton(bTotalCost);
         setLayout(null);
@@ -188,10 +194,31 @@ public class Window extends JFrame implements ActionListener, FoodCost{
             totalCost = Math.round((monthlyFoodCost + sandCost) *100)/100.00;
             lTotalCost.setText(String.valueOf("Całkowity miesięczny koszt: " + totalCost + "zł"));
 
-            JOptionPane.showMessageDialog(null, "Miesięczny koszt utrzymania Twojego kota to: " + totalCost + " zł", "Info o kosztach", JOptionPane.INFORMATION_MESSAGE);
+            catIcon2 = new ImageIcon("src/dev/koodeu/images/kitty.png");
+            JOptionPane.showMessageDialog(null, "Miesięczny koszt utrzymania Twojego kota to: " + totalCost + " zł", "Info o kosztach", JOptionPane.INFORMATION_MESSAGE, catIcon2);
 
         }
 
+        else if (source==mSave){
+
+            JFileChooser fileChooser = new JFileChooser();
+                if(fileChooser.showSaveDialog(null)==JFileChooser.APPROVE_OPTION){
+                File file = fileChooser.getSelectedFile();
+                        try {
+                            PrintWriter printWriter = new PrintWriter(file);
+                            Scanner scanner = new Scanner(lTotalCost.getText());
+                                while (scanner.hasNext()){
+                                    printWriter.println("Oj dużo.... dużo..... " + "\n" + scanner.nextLine() + "\n");
+                                }
+                                printWriter.close();
+                        }
+
+                        catch (FileNotFoundException e1){
+                            e1.printStackTrace();
+                        }
+
+                }
+        }
 
     }
 }

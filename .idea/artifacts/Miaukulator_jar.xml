@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Miaukulator:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Miaukulator_jar</output-path>
+    <root id="archive" name="Miaukulator.jar">
+      <element id="module-output" name="Miaukulator" />
+    </root>
+  </artifact>
+</component>
