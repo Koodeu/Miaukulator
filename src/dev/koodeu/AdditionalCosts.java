@@ -9,9 +9,11 @@ import java.awt.event.ActionListener;
 public class AdditionalCosts extends JFrame implements ActionListener {
 
 
-    JLabel lAdditionalCosts;
-    JTextField tAdditionalCosts1, tAdditionalCosts2, tAdditionalCosts3, tAdditionalCosts4;
-    JButton bSumbit;
+    private JLabel lAdditionalCosts;
+    private JTextField tAdditionalCosts1, tAdditionalCosts2, tAdditionalCosts3, tAdditionalCosts4;
+    private  JButton bSumbit;
+    private  double additionalCosts1, additionalCosts2, additionalCosts3, additionalCosts4;
+    public double totalAdditionalCosts;
 
     AdditionalCosts(){
 
@@ -47,9 +49,9 @@ public class AdditionalCosts extends JFrame implements ActionListener {
         lAdditionalCosts = new JLabel("Dodatkowe wydatki: ");
         lAdditionalCosts.setBounds(20,120, 120, 20);
         add(lAdditionalCosts);
-        tAdditionalCosts3 = new JTextField();
-        tAdditionalCosts3.setBounds(150, 120, 50,20);
-        add(tAdditionalCosts3);
+        tAdditionalCosts4 = new JTextField();
+        tAdditionalCosts4.setBounds(150, 120, 50,20);
+        add(tAdditionalCosts4);
 
         bSumbit = new JButton("Dodaj");
         bSumbit.setBounds(130, 165, 70, 20);
@@ -67,6 +69,41 @@ public class AdditionalCosts extends JFrame implements ActionListener {
 
         Object source = e.getSource();
             if(source == bSumbit){
+
+
+                    if(tAdditionalCosts1.getText().contains(",") || tAdditionalCosts2.getText().contains(",") ||
+                            tAdditionalCosts2.getText().contains(",")|| tAdditionalCosts2.getText().contains(",")){
+
+                        tAdditionalCosts1.setText(tAdditionalCosts1.getText().replace(",","."));
+                        tAdditionalCosts2.setText(tAdditionalCosts2.getText().replace(",","."));
+                        tAdditionalCosts3.setText(tAdditionalCosts3.getText().replace(",","."));
+                        tAdditionalCosts4.setText(tAdditionalCosts4.getText().replace(",","."));
+
+                    }
+
+
+                     if (tAdditionalCosts1.getText().isEmpty() ) {
+                        tAdditionalCosts1.setText("0");
+                    }
+
+                    if (tAdditionalCosts2.getText().isEmpty() ) {
+                        tAdditionalCosts2.setText("0");
+                    }
+
+                    if (tAdditionalCosts3.getText().isEmpty() ) {
+                        tAdditionalCosts3.setText("0");
+                    }
+
+                    if (tAdditionalCosts4.getText().isEmpty() ) {
+                        tAdditionalCosts4.setText("0");
+                    }
+
+
+                additionalCosts1 = Double.parseDouble(tAdditionalCosts1.getText());
+                additionalCosts2 = Double.parseDouble(tAdditionalCosts2.getText());
+                additionalCosts3 = Double.parseDouble(tAdditionalCosts3.getText());
+                additionalCosts4 = Double.parseDouble(tAdditionalCosts4.getText());
+                totalAdditionalCosts = additionalCosts1+additionalCosts2+additionalCosts3+additionalCosts4;
                 setVisible(false);
             }
         }

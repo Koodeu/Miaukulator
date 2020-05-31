@@ -20,7 +20,7 @@ public class Window extends JFrame implements ActionListener, FoodCost{
     JMenu menuFile, menuAbout;
     JMenuItem mOpen, mSave, mExit, mAbout;
     JLabel lFoodBagCost, lFoodBagSize, lSandBagCost, lSandBagSize, lDailyFoodDose, lSandExchangeRate, lMonthlyFoodCost,
-    lMonthlySandCost, lTotalCost;
+    lMonthlySandCost, lTotalCost, ltotalAdditionalCost;
     JTextField tFoodBagCost, tFoodBagSize, tSandBagCost, tSandBagSize, tDailyFoodDose;
     JComboBox comboSandExchangeRate;
     JButton bTotalCost, bAdditionalCosts;
@@ -30,7 +30,7 @@ public class Window extends JFrame implements ActionListener, FoodCost{
     AdditionalCosts additionalCosts;
 
     Window(){
-        setTitle("Miaukulator v.1.03");
+        setTitle("Miaukulator v.1.04");
         setSize(500, 400);
         getRootPane().setDefaultButton(bTotalCost);
         setLayout(null);
@@ -129,6 +129,11 @@ public class Window extends JFrame implements ActionListener, FoodCost{
         lMonthlySandCost.setBounds(30, 260, 200, 20);
         add(lMonthlySandCost);
 
+        ltotalAdditionalCost = new JLabel("Całkowity dodatkowy koszt:");
+        ltotalAdditionalCost.setBounds(30,280,280,20);
+        add(ltotalAdditionalCost);
+
+
 
         bTotalCost = new JButton("Oblicz");
         bTotalCost.setBounds(170,200, 150, 20);
@@ -139,7 +144,7 @@ public class Window extends JFrame implements ActionListener, FoodCost{
 
 
         lTotalCost = new JLabel("Całkowity miesięczny koszt: ");
-        lTotalCost.setBounds(30, 285, 250, 20);
+        lTotalCost.setBounds(30, 300, 250, 20);
         add(lTotalCost);
 
 
@@ -169,7 +174,9 @@ public class Window extends JFrame implements ActionListener, FoodCost{
 
         else if (source == bTotalCost) {
 
-
+            if(additionalCosts == null) {
+                additionalCosts = new AdditionalCosts();
+            }
 
             if (tFoodBagCost.getText().contains(",") ){
                 tFoodBagCost.setText(tFoodBagCost.getText().replace(",","."));
@@ -197,7 +204,19 @@ public class Window extends JFrame implements ActionListener, FoodCost{
             sandCost = Math.round((sandBagCost / sandBagSize * (sandExchangeRate * 1.5)) * 100) / 100.00;
             lMonthlySandCost.setText("Miesięczny koszt żwirku: " + (String.valueOf(sandCost)) + "zł");
 
-            totalCost = Math.round((monthlyFoodCost + sandCost) *100)/100.00;
+            ltotalAdditionalCost.setText("Całkowity miesięczny dodatkowy koszt: " + String.valueOf(additionalCosts.totalAdditionalCosts) + " zł");
+
+
+            if(additionalCosts.totalAdditionalCosts!=0) {
+
+                totalCost = Math.round((monthlyFoodCost + sandCost + additionalCosts.totalAdditionalCosts) * 100) / 100.00;
+            }
+            else if(additionalCosts.totalAdditionalCosts==0){
+                totalCost = Math.round((monthlyFoodCost + sandCost) * 100) / 100.00;
+                ltotalAdditionalCost.setText("Całkowity miesięczny dodatkowy koszt: 0 zł ");
+            }
+
+
             lTotalCost.setText(String.valueOf("Całkowity miesięczny koszt: " + totalCost + "zł"));
 
             catIcon2 = new ImageIcon("src/dev/koodeu/images/kitty.png");
@@ -228,17 +247,10 @@ public class Window extends JFrame implements ActionListener, FoodCost{
 
 
         if (source==bAdditionalCosts){
-
-                if(additionalCosts == null){
-                    additionalCosts = new AdditionalCosts();
-                    additionalCosts.setVisible(true);
-                }
-                else{
-                    additionalCosts.setVisible(true);
-                }
+            additionalCosts.setVisible(true);
+            }
 
         }
 
-
     }
-}
+
