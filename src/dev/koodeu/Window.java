@@ -14,13 +14,13 @@ import java.util.Scanner;
 
 
 
-public class Window extends JFrame implements ActionListener, FoodCost{
+public class Window extends JFrame implements ActionListener, FoodCost {
 
     JMenuBar barMenuBar;
     JMenu menuFile, menuAbout;
     JMenuItem mOpen, mSave, mExit, mAbout;
     JLabel lFoodBagCost, lFoodBagSize, lSandBagCost, lSandBagSize, lDailyFoodDose, lSandExchangeRate, lMonthlyFoodCost,
-    lMonthlySandCost, lTotalCost, ltotalAdditionalCost;
+            lMonthlySandCost, lTotalCost, ltotalAdditionalCost;
     JTextField tFoodBagCost, tFoodBagSize, tSandBagCost, tSandBagSize, tDailyFoodDose;
     JComboBox comboSandExchangeRate;
     JButton bTotalCost, bAdditionalCosts;
@@ -29,15 +29,15 @@ public class Window extends JFrame implements ActionListener, FoodCost{
     ImageIcon catIcon, catIcon2;
     AdditionalCosts additionalCosts;
 
-    Window(){
-        setTitle("Miaukulator v.1.04");
+    Window() {
+        setTitle("Miaukulator v.1.05");
         setSize(500, 400);
         getRootPane().setDefaultButton(bTotalCost);
         setLayout(null);
 
 
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(dimension.width/2-this.getSize().width/2, dimension.height/2-this.getSize().height/2);
+        this.setLocation(dimension.width / 2 - this.getSize().width / 2, dimension.height / 2 - this.getSize().height / 2);
 
         barMenuBar = new JMenuBar();
         setJMenuBar(barMenuBar);
@@ -76,14 +76,14 @@ public class Window extends JFrame implements ActionListener, FoodCost{
         lFoodBagSize.setBounds(260, 20, 130, 20);
         add(lFoodBagSize);
         tFoodBagSize = new JTextField();
-        tFoodBagSize.setBounds(430, 20, 30,20);
+        tFoodBagSize.setBounds(430, 20, 30, 20);
         add(tFoodBagSize);
 
         lSandBagCost = new JLabel("Cena paczki żwirku:");
         lSandBagCost.setBounds(30, 60, 150, 20);
         add(lSandBagCost);
         tSandBagCost = new JTextField();
-        tSandBagCost.setBounds(190, 60,50, 20);
+        tSandBagCost.setBounds(190, 60, 50, 20);
         add(tSandBagCost);
 
         lSandBagSize = new JLabel("Wielkość paczki żwirku w kg: ");
@@ -97,7 +97,7 @@ public class Window extends JFrame implements ActionListener, FoodCost{
         lDailyFoodDose.setBounds(30, 120, 220, 20);
         add(lDailyFoodDose);
         tDailyFoodDose = new JTextField();
-        tDailyFoodDose.setBounds(245,120,30,20);
+        tDailyFoodDose.setBounds(245, 120, 30, 20);
         add(tDailyFoodDose);
 
         lSandExchangeRate = new JLabel("Ilość wymian żwirku w miesiącu: ");
@@ -130,17 +130,15 @@ public class Window extends JFrame implements ActionListener, FoodCost{
         add(lMonthlySandCost);
 
         ltotalAdditionalCost = new JLabel("Całkowity dodatkowy koszt:");
-        ltotalAdditionalCost.setBounds(30,280,280,20);
+        ltotalAdditionalCost.setBounds(30, 280, 280, 20);
         add(ltotalAdditionalCost);
 
 
-
         bTotalCost = new JButton("Oblicz");
-        bTotalCost.setBounds(170,200, 150, 20);
+        bTotalCost.setBounds(170, 200, 150, 20);
         bTotalCost.addActionListener(this);
         getRootPane().setDefaultButton(bTotalCost);
         add(bTotalCost);
-
 
 
         lTotalCost = new JLabel("Całkowity miesięczny koszt: ");
@@ -153,7 +151,7 @@ public class Window extends JFrame implements ActionListener, FoodCost{
 
     @Override
     public double foodCost(double foodBagCost, double foodBagSize, int dialyDose) {
-        return foodBagCost/foodBagSize/1000 * dialyDose*(30.5);
+        return foodBagCost / foodBagSize / 1000 * dialyDose * (30.5);
 
     }
 
@@ -163,41 +161,37 @@ public class Window extends JFrame implements ActionListener, FoodCost{
 
         if (source == mExit) {
             dispose();
-        }
+        } else if (source == mAbout) {
+            catIcon = new ImageIcon("src/dev/koodeu/images/cat.png");
+            JOptionPane.showMessageDialog(null, "\nTo jest pierwsza wersja Miaukulatora, który liczy miesięczny koszt utrzymania kociambra :-)" +
+                            " \n\n                                     KociRights Krystian Limiera\n",
+                    "O Miaukulatorze", JOptionPane.INFORMATION_MESSAGE, catIcon);
+        } else if (source == bTotalCost) {
 
-        else if (source == mAbout) {
-        catIcon = new ImageIcon("src/dev/koodeu/images/cat.png");
-        JOptionPane.showMessageDialog(null, "\nTo jest pierwsza wersja Miaukulatora, który liczy miesięczny koszt utrzymania kociambra :-)" +
-                        " \n\n                                     KociRights Krystian Limiera\n",
-                "O Miaukulatorze", JOptionPane.INFORMATION_MESSAGE, catIcon);
-        }
-
-        else if (source == bTotalCost) {
-
-            if(additionalCosts == null) {
+            if (additionalCosts == null) {
                 additionalCosts = new AdditionalCosts();
             }
 
-            if (tFoodBagCost.getText().contains(",") ){
-                tFoodBagCost.setText(tFoodBagCost.getText().replace(",","."));
+            if (tFoodBagCost.getText().contains(",")) {
+                tFoodBagCost.setText(tFoodBagCost.getText().replace(",", "."));
             }
             foodCost = Double.parseDouble(tFoodBagCost.getText());
 
-            if (tFoodBagSize.getText().contains(",")){
-                tFoodBagSize.setText(tFoodBagSize.getText().replace(",","."));
+            if (tFoodBagSize.getText().contains(",")) {
+                tFoodBagSize.setText(tFoodBagSize.getText().replace(",", "."));
             }
             bagSize = Double.parseDouble(tFoodBagSize.getText());
             dailyFoodDose = Integer.parseInt(tDailyFoodDose.getText());
             monthlyFoodCost = Math.round((foodCost / bagSize / 1000 * dailyFoodDose * 30.5) * 100) / 100.0;
             lMonthlyFoodCost.setText("Miesięczny koszt karmy: " + (String.valueOf(monthlyFoodCost)) + "zł");
 
-            if(tSandBagSize.getText().contains(",")){
-                tSandBagSize.setText(tSandBagSize.getText().replace(",","."));
+            if (tSandBagSize.getText().contains(",")) {
+                tSandBagSize.setText(tSandBagSize.getText().replace(",", "."));
             }
             sandBagSize = Double.parseDouble(tSandBagSize.getText());
 
-            if (tSandBagCost.getText().contains(",")){
-                tSandBagCost.setText(tSandBagCost.getText().replace(",",".") );
+            if (tSandBagCost.getText().contains(",")) {
+                tSandBagCost.setText(tSandBagCost.getText().replace(",", "."));
             }
             sandBagCost = Double.parseDouble(tSandBagCost.getText());
             sandExchangeRate = Integer.parseInt(comboSandExchangeRate.getSelectedItem().toString());
@@ -207,11 +201,10 @@ public class Window extends JFrame implements ActionListener, FoodCost{
             ltotalAdditionalCost.setText("Całkowity miesięczny dodatkowy koszt: " + String.valueOf(additionalCosts.totalAdditionalCosts) + " zł");
 
 
-            if(additionalCosts.totalAdditionalCosts!=0) {
+            if (additionalCosts.totalAdditionalCosts != 0) {
 
                 totalCost = Math.round((monthlyFoodCost + sandCost + additionalCosts.totalAdditionalCosts) * 100) / 100.00;
-            }
-            else if(additionalCosts.totalAdditionalCosts==0){
+            } else if (additionalCosts.totalAdditionalCosts == 0) {
                 totalCost = Math.round((monthlyFoodCost + sandCost) * 100) / 100.00;
                 ltotalAdditionalCost.setText("Całkowity miesięczny dodatkowy koszt: 0 zł ");
             }
@@ -222,35 +215,35 @@ public class Window extends JFrame implements ActionListener, FoodCost{
             catIcon2 = new ImageIcon("src/dev/koodeu/images/kitty.png");
             JOptionPane.showMessageDialog(null, "Całkowity miesięczny koszt utrzymania Twojego kota to: " + totalCost + " zł", "Info o kosztach", JOptionPane.INFORMATION_MESSAGE, catIcon2);
 
-        }
-
-        else if (source==mSave){
+        } else if (source == mSave) {
 
             JFileChooser fileChooser = new JFileChooser();
-                if(fileChooser.showSaveDialog(null)==JFileChooser.APPROVE_OPTION){
+            if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
                 File file = fileChooser.getSelectedFile();
-                        try {
-                            PrintWriter printWriter = new PrintWriter(file);
-                            Scanner scanner = new Scanner(lTotalCost.getText());
-                                while (scanner.hasNext()){
-                                    printWriter.println("Oj dużo.... dużo..... " + "\n" + scanner.nextLine() + "\n");
-                                }
-                                printWriter.close();
-                        }
-
-                        catch (FileNotFoundException e1){
-                            e1.printStackTrace();
-                        }
-
+                try {
+                    PrintWriter printWriter = new PrintWriter(file);
+                    Scanner scanner = new Scanner(lTotalCost.getText());
+                    while (scanner.hasNext()) {
+                        printWriter.println("Oj dużo.... dużo..... " + "\n" + scanner.nextLine() + "\n");
+                    }
+                    printWriter.close();
+                } catch (FileNotFoundException e1) {
+                    e1.printStackTrace();
                 }
+
+            }
         }
 
 
-        if (source==bAdditionalCosts){
-            additionalCosts.setVisible(true);
+        if (source == bAdditionalCosts) {
+            if (additionalCosts == null) {
+                AdditionalCosts additionalCosts = new AdditionalCosts();
+                additionalCosts.setVisible(true);
+            } else {
+                additionalCosts.setVisible(true);
             }
 
         }
 
     }
-
+}
