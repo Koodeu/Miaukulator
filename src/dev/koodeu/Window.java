@@ -23,13 +23,14 @@ public class Window extends JFrame implements ActionListener, FoodCost{
     lMonthlySandCost, lTotalCost;
     JTextField tFoodBagCost, tFoodBagSize, tSandBagCost, tSandBagSize, tDailyFoodDose;
     JComboBox comboSandExchangeRate;
-    JButton bTotalCost;
+    JButton bTotalCost, bAdditionalCosts;
     double foodCost, monthlyFoodCost, bagSize, sandBagSize, sandBagCost, sandCost, totalCost;
     int dailyFoodDose, sandExchangeRate;
     ImageIcon catIcon, catIcon2;
+    AdditionalCosts additionalCosts;
 
     Window(){
-        setTitle("Miaukulator v.1.02");
+        setTitle("Miaukulator v.1.03");
         setSize(500, 400);
         getRootPane().setDefaultButton(bTotalCost);
         setLayout(null);
@@ -114,6 +115,11 @@ public class Window extends JFrame implements ActionListener, FoodCost{
         comboSandExchangeRate.addItem(8);
         add(comboSandExchangeRate);
 
+        bAdditionalCosts = new JButton("Dodatkowe koszty");
+        bAdditionalCosts.setBounds(315, 150, 150, 20);
+        bAdditionalCosts.addActionListener(this);
+        add(bAdditionalCosts);
+
 
         lMonthlyFoodCost = new JLabel("Miesięczny koszt karmy: ");
         lMonthlyFoodCost.setBounds(30, 240, 200, 20);
@@ -195,7 +201,7 @@ public class Window extends JFrame implements ActionListener, FoodCost{
             lTotalCost.setText(String.valueOf("Całkowity miesięczny koszt: " + totalCost + "zł"));
 
             catIcon2 = new ImageIcon("src/dev/koodeu/images/kitty.png");
-            JOptionPane.showMessageDialog(null, "Miesięczny koszt utrzymania Twojego kota to: " + totalCost + " zł", "Info o kosztach", JOptionPane.INFORMATION_MESSAGE, catIcon2);
+            JOptionPane.showMessageDialog(null, "Całkowity miesięczny koszt utrzymania Twojego kota to: " + totalCost + " zł", "Info o kosztach", JOptionPane.INFORMATION_MESSAGE, catIcon2);
 
         }
 
@@ -219,6 +225,20 @@ public class Window extends JFrame implements ActionListener, FoodCost{
 
                 }
         }
+
+
+        if (source==bAdditionalCosts){
+
+                if(additionalCosts == null){
+                    additionalCosts = new AdditionalCosts();
+                    additionalCosts.setVisible(true);
+                }
+                else{
+                    additionalCosts.setVisible(true);
+                }
+
+        }
+
 
     }
 }
