@@ -30,10 +30,14 @@ public class Window extends JFrame implements ActionListener, FoodCost {
     AdditionalCosts additionalCosts;
 
     Window() {
-        setTitle("Miaukulator v.1.05");
+        setTitle("Miaukulator v.1.06");
         setSize(500, 400);
         getRootPane().setDefaultButton(bTotalCost);
         setLayout(null);
+
+        additionalCosts = new AdditionalCosts();
+        additionalCosts.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        additionalCosts.setVisible(false);
 
 
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -168,9 +172,9 @@ public class Window extends JFrame implements ActionListener, FoodCost {
                     "O Miaukulatorze", JOptionPane.INFORMATION_MESSAGE, catIcon);
         } else if (source == bTotalCost) {
 
-            if (additionalCosts == null) {
+            /*if (additionalCosts == null) {
                 additionalCosts = new AdditionalCosts();
-            }
+            } */
 
             if (tFoodBagCost.getText().contains(",")) {
                 tFoodBagCost.setText(tFoodBagCost.getText().replace(",", "."));
@@ -235,15 +239,7 @@ public class Window extends JFrame implements ActionListener, FoodCost {
         }
 
 
-        if (source == bAdditionalCosts) {
-            if (additionalCosts == null) {
-                AdditionalCosts additionalCosts = new AdditionalCosts();
-                additionalCosts.setVisible(true);
-            } else {
-                additionalCosts.setVisible(true);
-            }
-
-        }
+        else if (source == bAdditionalCosts) additionalCosts.setVisible(true);
 
     }
 }

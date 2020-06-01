@@ -19,7 +19,6 @@ public class AdditionalCosts extends JFrame implements ActionListener {
 
         setSize(250, 250);
         setTitle("Dodatkowe koszty");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(null);
 
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
