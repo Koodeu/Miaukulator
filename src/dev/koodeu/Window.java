@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 
 
-public class Window extends JFrame implements ActionListener, FoodCost {
+public class Window extends JFrame implements ActionListener {
 
     JMenuBar barMenuBar;
     JMenu menuFile, menuAbout;
@@ -30,7 +30,7 @@ public class Window extends JFrame implements ActionListener, FoodCost {
     AdditionalCosts additionalCosts;
 
     Window() {
-        setTitle("Miaukulator v.1.06");
+        setTitle("Miaukulator v.1.07");
         setSize(500, 400);
         getRootPane().setDefaultButton(bTotalCost);
         setLayout(null);
@@ -153,11 +153,9 @@ public class Window extends JFrame implements ActionListener, FoodCost {
     }
 
 
-    @Override
-    public double foodCost(double foodBagCost, double foodBagSize, int dialyDose) {
-        return foodBagCost / foodBagSize / 1000 * dialyDose * (30.5);
 
-    }
+
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
